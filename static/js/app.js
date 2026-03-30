@@ -154,9 +154,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </div>
                     ${r.bio ? `<div class="card-bio">${escapeHtml(r.bio)}</div>` : ''}
+                    ${renderExtra(r.extra)}
                     <div class="card-footer">
                         <span class="card-platform ${pClass}">${r.platform}</span>
-                        <a class="card-link" href="${r.profile_url}" target="_blank" rel="noopener">Voir le profil</a>
+                        <a class="card-link" href="${r.profile_url}" target="_blank" rel="noopener">Voir le profil &rarr;</a>
                     </div>
                 </div>`;
             }
@@ -164,6 +165,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         container.innerHTML = html;
+    }
+
+    function renderExtra(extra) {
+        if (!extra || Object.keys(extra).length === 0) return '';
+        const items = [];
+        if (extra.followers) items.push(`${extra.followers} followers`);
+        if (extra.repos) items.push(`${extra.repos} repos`);
+        if (extra.location) items.push(escapeHtml(extra.location));
+        if (extra.company) items.push(escapeHtml(extra.company));
+        if (extra.is_verified) items.push('Verifie');
+        if (items.length === 0) return '';
+        return `<div class="card-extra">${items.join(' &middot; ')}</div>`;
     }
 
     function escapeHtml(str) {

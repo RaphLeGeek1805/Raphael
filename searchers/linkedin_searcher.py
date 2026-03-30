@@ -1,15 +1,8 @@
 import re
-from urllib.parse import unquote
-
-import requests
-from bs4 import BeautifulSoup
 
 import config
 from searchers.base import BaseSearcher, SearchResult
-
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-}
+from searchers.engines import multi_engine_search
 
 
 class LinkedInSearcher(BaseSearcher):
@@ -18,69 +11,45 @@ class LinkedInSearcher(BaseSearcher):
 
     def search_by_name(self, first_name: str, last_name: str) -> list[SearchResult]:
         query = f"{first_name} {last_name}"
-        results = self._search_google_dork(query)
-        if not results:
-            results = self._search_duckduckgo(query)
-        return results
-
-    def _search_google_dork(self, query: str) -> list[SearchResult]:
-        try:
-            resp = requests.get(
-                "https://www.google.com/search",
-                params={"q": f'site:linkedin.com/in "{query}"', "num": 10},
-                headers=HEADERS,
-                timeout=config.SEARCH_TIMEOUT,
-            )
-            if not resp.ok:
-                return []
-            return self._parse_search_results(resp.text)
-        except Exception:
-            return []
-
-    def _search_duckduckgo(self, query: str) -> list[SearchResult]:
-        try:
-            resp = requests.get(
-                "https://html.duckduckgo.com/html/",
-                params={"q": f'site:linkedin.com/in "{query}"'},
-                headers=HEADERS,
-                timeout=config.SEARCH_TIMEOUT,
-            )
-            if not resp.ok:
-                return []
-            return self._parse_search_results(resp.text)
-        except Exception:
-            return []
-
-    def _parse_search_results(self, html: str) -> list[SearchResult]:
-        soup = BeautifulSoup(html, "lxml")
         results = []
         seen = set()
 
-        for tag in soup.find_all("a", href=True):
-            href = tag["href"]
-            if "/url?q=" in href:
-                href = unquote(href.split("/url?q=")[1].split("&")[0])
+        # Search with multiple query variations for better coverage
+        queries = [
+            f'site:linkedin.com/in "{query}"',
+            f'site:linkedin.com/in {first_name} {last_name}',
+        ]
 
-            match = re.search(r"linkedin\.com/in/([\w-]+)", href)
-            if not match:
-                continue
+        for q in queries:
+            search_results = multi_engine_search(q)
+            for r in search_results:
+                match = re.search(r"linkedin\.com/in/([\w-]+)", r["url"])
+                if not match:
+                    continue
+                slug = match.group(1)
+                if slug in seen:
+                    continue
+                seen.add(slug)
 
-            slug = match.group(1)
-            if slug in seen:
-                continue
-            seen.add(slug)
+                # Extract display name from search result title
+                title = r.get("title", "")
+                # Remove " - LinkedIn", " | LinkedIn", etc.
+                display_name = re.sub(r"\s*[-|–].*[Ll]inked[Ii]n.*$", "", title).strip()
+                if not display_name or len(display_name) < 2:
+                    display_name = slug.replace("-", " ").title()
 
-            title_text = tag.get_text(strip=True)
-            display_name = re.sub(r"\s*[-|].*LinkedIn.*$", "", title_text).strip()
-            if not display_name or display_name.lower() == slug:
-                display_name = slug.replace("-", " ").title()
+                bio = r.get("snippet", "")
 
-            results.append(SearchResult(
-                platform="LinkedIn",
-                username=slug,
-                display_name=display_name,
-                profile_url=f"https://www.linkedin.com/in/{slug}",
-                confidence=0.6,
-            ))
+                results.append(SearchResult(
+                    platform="LinkedIn",
+                    username=slug,
+                    display_name=display_name,
+                    profile_url=f"https://www.linkedin.com/in/{slug}",
+                    bio=bio if bio else None,
+                    confidence=0.6,
+                ))
+
+            if len(results) >= config.MAX_RESULTS_PER_PLATFORM:
+                break
 
         return results[:config.MAX_RESULTS_PER_PLATFORM]

@@ -1,17 +1,21 @@
+import re
+
 import requests
 from bs4 import BeautifulSoup
 
 import config
 from searchers.base import BaseSearcher, SearchResult
+from searchers.engines import multi_engine_search
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+}
 
 NITTER_INSTANCES = [
     "https://nitter.privacydev.net",
     "https://nitter.poast.org",
+    "https://nitter.cz",
 ]
-
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-}
 
 
 class TwitterSearcher(BaseSearcher):
@@ -20,45 +24,53 @@ class TwitterSearcher(BaseSearcher):
 
     def search_by_name(self, first_name: str, last_name: str) -> list[SearchResult]:
         query = f"{first_name} {last_name}"
-        results = self._search_via_google_dork(query)
+
+        # Try multiple approaches in order
+        results = self._search_via_engines(query)
         if not results:
             results = self._search_via_nitter(query)
         return results
 
-    def _search_via_google_dork(self, query: str) -> list[SearchResult]:
-        try:
-            resp = requests.get(
-                "https://www.google.com/search",
-                params={"q": f'site:x.com "{query}"', "num": config.MAX_RESULTS_PER_PLATFORM},
-                headers=HEADERS,
-                timeout=config.SEARCH_TIMEOUT,
-            )
-            if not resp.ok:
-                return []
-            soup = BeautifulSoup(resp.text, "lxml")
-            results = []
-            for link_tag in soup.select("a[href]"):
-                href = link_tag.get("href", "")
-                if "x.com/" in href and "/status/" not in href:
-                    url = href
-                    if "/url?q=" in url:
-                        url = url.split("/url?q=")[1].split("&")[0]
-                    if "x.com/" not in url:
-                        continue
-                    parts = url.rstrip("/").split("/")
-                    username = parts[-1] if parts else ""
-                    if username and not username.startswith("search") and username not in ("home", "explore", "settings"):
-                        if not any(r.username == username for r in results):
-                            results.append(SearchResult(
-                                platform="Twitter / X",
-                                username=f"@{username}",
-                                display_name=username,
-                                profile_url=f"https://x.com/{username}",
-                                confidence=0.5,
-                            ))
-            return results[:config.MAX_RESULTS_PER_PLATFORM]
-        except Exception:
-            return []
+    def _search_via_engines(self, query: str) -> list[SearchResult]:
+        """Search via DuckDuckGo/Bing/Google for X.com profiles."""
+        search_results = multi_engine_search(
+            f'site:x.com OR site:twitter.com "{query}"'
+        )
+        results = []
+        seen = set()
+
+        for r in search_results:
+            url = r["url"]
+            # Match x.com/username or twitter.com/username (not /status/, /search, etc.)
+            match = re.search(r"(?:x\.com|twitter\.com)/([\w]+)$", url.rstrip("/"))
+            if not match:
+                continue
+
+            username = match.group(1)
+            skip = {"search", "explore", "home", "settings", "login", "signup",
+                    "help", "i", "hashtag", "intent", "tos", "privacy"}
+            if username.lower() in skip or username in seen:
+                continue
+            seen.add(username)
+
+            # Extract display name from title
+            title = r.get("title", "")
+            display_name = title.split("(")[0].strip() if "(" in title else title.split("-")[0].strip()
+            if not display_name or display_name.lower() in ("x", "twitter"):
+                display_name = username
+
+            bio = r.get("snippet", "")
+
+            results.append(SearchResult(
+                platform="Twitter / X",
+                username=f"@{username}",
+                display_name=display_name,
+                profile_url=f"https://x.com/{username}",
+                bio=bio if bio else None,
+                confidence=0.6,
+            ))
+
+        return results[:config.MAX_RESULTS_PER_PLATFORM]
 
     def _search_via_nitter(self, query: str) -> list[SearchResult]:
         for instance in NITTER_INSTANCES:
@@ -67,7 +79,7 @@ class TwitterSearcher(BaseSearcher):
                     f"{instance}/search",
                     params={"f": "users", "q": query},
                     headers=HEADERS,
-                    timeout=config.SEARCH_TIMEOUT,
+                    timeout=8,
                 )
                 if not resp.ok:
                     continue

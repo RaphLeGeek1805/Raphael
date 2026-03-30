@@ -137,6 +137,7 @@ header {
 .card-name { font-weight: 600; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .card-username { color: var(--text-muted); font-size: 0.85rem; }
 .card-bio { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.card-extra { color: var(--accent); font-size: 0.78rem; margin-bottom: 12px; }
 .card-footer { display: flex; justify-content: space-between; align-items: center; }
 .card-platform {
     font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 12px; text-transform: uppercase;

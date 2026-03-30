@@ -1,3 +1,4 @@
+import logging
 import os
 import uuid
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -14,6 +15,8 @@ from searchers.facebook_searcher import FacebookSearcher
 from searchers.image_searcher import ImageSearcher
 from utils.cache import cache
 from utils.face import prepare_search_image
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config.SECRET_KEY
@@ -43,8 +46,10 @@ def run_searcher(searcher, method: str, *args) -> tuple[str, str, list[SearchRes
     try:
         fn = getattr(searcher, method)
         results = fn(*args)
+        logging.info(f"{searcher.platform_name}: {len(results)} result(s)")
         return searcher.platform_name, "ok", results
     except Exception as e:
+        logging.warning(f"{searcher.platform_name} failed: {e}")
         return searcher.platform_name, f"error: {e}", []
 
 
