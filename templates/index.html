@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="search-tabs">
+    <button class="tab active" data-tab="name">Recherche par nom</button>
+    <button class="tab" data-tab="photo">Recherche par photo</button>
+</div>
+
+<div class="tab-content active" id="tab-name">
+    <form id="name-form" class="search-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="first_name">Prenom</label>
+                <input type="text" id="first_name" name="first_name" placeholder="Ex: Jean">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Nom</label>
+                <input type="text" id="last_name" name="last_name" placeholder="Ex: Dupont">
+            </div>
+        </div>
+        <div class="platforms">
+            <label class="platform-check">
+                <input type="checkbox" name="platforms" value="GitHub" checked>
+                <span class="platform-badge github">GitHub</span>
+            </label>
+            <label class="platform-check">
+                <input type="checkbox" name="platforms" value="Twitter / X" checked>
+                <span class="platform-badge twitter">Twitter / X</span>
+            </label>
+            <label class="platform-check">
+                <input type="checkbox" name="platforms" value="LinkedIn" checked>
+                <span class="platform-badge linkedin">LinkedIn</span>
+            </label>
+            <label class="platform-check">
+                <input type="checkbox" name="platforms" value="Instagram" checked>
+                <span class="platform-badge instagram">Instagram</span>
+            </label>
+            <label class="platform-check">
+                <input type="checkbox" name="platforms" value="Facebook" checked>
+                <span class="platform-badge facebook">Facebook</span>
+            </label>
+        </div>
+        <button type="submit" class="btn-search">Rechercher</button>
+    </form>
+</div>
+
+<div class="tab-content" id="tab-photo">
+    <form id="photo-form" class="search-form">
+        <div class="upload-area" id="drop-zone">
+            <div class="upload-icon">&#128247;</div>
+            <p>Glissez-deposez une photo ici ou cliquez pour selectionner</p>
+            <input type="file" id="photo-input" name="photo" accept="image/*" hidden>
+            <img id="photo-preview" class="photo-preview" hidden>
+        </div>
+        <button type="submit" class="btn-search" disabled id="photo-submit">Rechercher par photo</button>
+    </form>
+</div>
+
+<div id="loading" class="loading" hidden>
+    <div class="spinner"></div>
+    <p>Recherche en cours sur les reseaux sociaux...</p>
+</div>
+
+<div id="results" class="results-container" hidden></div>
+{% endblock %}
