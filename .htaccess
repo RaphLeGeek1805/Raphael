@@ -1,0 +1,10 @@
+# Force Passenger to handle all requests
+PassengerEnabled on
+PassengerAppRoot /home/<your-cpanel-username>/raphael
+PassengerPython /home/<your-cpanel-username>/virtualenv/raphael/3.11/bin/python
+
+# Redirect all requests to the Passenger WSGI app
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ / [L]
