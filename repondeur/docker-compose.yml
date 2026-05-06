@@ -11,21 +11,13 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      # --- Trunk OVH + dialplan ---
-      OVH_SIP_USERNAME: ${OVH_SIP_USERNAME}
-      OVH_SIP_PASSWORD: ${OVH_SIP_PASSWORD}
+      # --- Réception SIP depuis OVH CCS + dialplan ---
       EXTERNAL_IP: ${EXTERNAL_IP}
+      OVH_CCS_ALLOWED_IPS: ${OVH_CCS_ALLOWED_IPS}
+      OVH_URGENCE_REFER_URI: ${OVH_URGENCE_REFER_URI}
       TECH_MOBILE: ${TECH_MOBILE}
       EXT_100_PASSWORD: ${EXT_100_PASSWORD}
       AMI_PASSWORD: ${AMI_PASSWORD}
-      VM_PIN_100: ${VM_PIN_100}
-      VM_PIN_101: ${VM_PIN_101}
-      VM_PIN_102: ${VM_PIN_102}
-      VM_PIN_103: ${VM_PIN_103}
-      VM_EMAIL_ACCUEIL: ${VM_EMAIL_ACCUEIL}
-      VM_EMAIL_DEVIS: ${VM_EMAIL_DEVIS}
-      VM_EMAIL_SUIVI: ${VM_EMAIL_SUIVI}
-      VM_EMAIL_URGENCE: ${VM_EMAIL_URGENCE}
       # --- AI Agent ---
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
       CLAUDE_MODEL: ${CLAUDE_MODEL:-claude-opus-4-7}
@@ -35,7 +27,6 @@ services:
       PG_DSN: postgresql://depanmagic:${PG_PASSWORD}@postgres:5432/depanmagic
     volumes:
       - ./asterisk:/etc/asterisk-templates:ro
-      - ./sounds/custom:/var/lib/asterisk/sounds/custom:ro
       - ./ai-agent/knowledge:/opt/ai-agent/knowledge:ro
       - asterisk-spool:/var/spool/asterisk
       - asterisk-logs:/var/log/asterisk
@@ -61,18 +52,6 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
-
-  postfix:
-    image: boky/postfix:latest
-    container_name: depanmagic-postfix
-    restart: unless-stopped
-    environment:
-      ALLOWED_SENDER_DOMAINS: depanmagic.fr
-      RELAYHOST: ${SMTP_RELAY_HOST}
-      RELAYHOST_USERNAME: ${SMTP_RELAY_USER}
-      RELAYHOST_PASSWORD: ${SMTP_RELAY_PASSWORD}
-    ports:
-      - "127.0.0.1:25:25"
 
 volumes:
   asterisk-spool:
