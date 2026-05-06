@@ -1,0 +1,4 @@
+.env
+sounds/custom/*.wav
+prompts/.tmp/
+*.log

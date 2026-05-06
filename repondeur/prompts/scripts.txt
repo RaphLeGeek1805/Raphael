@@ -1,0 +1,15 @@
+# Scripts d'annonces vocales DEPANMAGIC
+# Format : <id_fichier>|<texte_a_synthetiser>
+# Le script generate_prompts.py lit ce fichier et produit les .wav 8kHz mono pour Asterisk.
+
+depanmagic-welcome|Bienvenue chez DEPAN MAGIC, votre spécialiste du dépannage à domicile. Tous nos conseillers sont à votre écoute.
+depanmagic-menu|Pour une urgence dépannage, tapez 1. Pour une demande de devis, tapez 2. Pour le suivi d'une intervention, tapez 3. Pour connaître nos horaires et coordonnées, tapez 4. Pour parler à un conseiller, tapez 0. Pour réécouter ce menu, tapez dièse.
+depanmagic-urgence-transfer|Nous vous mettons immédiatement en relation avec notre technicien d'astreinte. Veuillez patienter quelques instants.
+depanmagic-urgence-vm|Notre technicien d'astreinte est momentanément indisponible. Laissez votre nom, votre numéro et la nature de l'urgence après le bip, nous vous rappelons dans les plus brefs délais.
+depanmagic-devis-intro|Pour établir votre devis, merci de laisser après le bip votre nom, votre numéro de téléphone, votre adresse et la nature des travaux. Nous vous recontacterons sous 24 heures ouvrées.
+depanmagic-suivi-intro|Pour le suivi de votre dossier, merci d'indiquer après le bip votre nom et le numéro de référence de votre intervention. Un conseiller vous rappellera rapidement.
+depanmagic-horaires|Nos bureaux sont ouverts du lundi au vendredi, de 8 heures à 19 heures, et le samedi de 9 heures à 12 heures. Notre service d'urgence est disponible 24 heures sur 24, 7 jours sur 7. Vous pouvez également nous joindre par e-mail à l'adresse contact arobase depan magic point fr.
+depanmagic-transfer-conseiller|Nous transférons votre appel vers un conseiller. Merci de patienter.
+depanmagic-invalide|Choix invalide. Veuillez réessayer.
+depanmagic-timeout|Nous n'avons pas reçu de réponse. Vous allez être redirigé vers notre messagerie.
+depanmagic-ferme|Bonjour, vous êtes bien chez DEPAN MAGIC. Nos bureaux sont actuellement fermés. Pour une urgence dépannage, tapez 1 et notre technicien d'astreinte vous répondra. Pour laisser un message, tapez 9 ou patientez après le bip.

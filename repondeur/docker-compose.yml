@@ -1,0 +1,46 @@
+services:
+  asterisk:
+    image: andrius/asterisk:20-current
+    container_name: depanmagic-asterisk
+    restart: unless-stopped
+    network_mode: host  # SIP/RTP fonctionnent mal en bridge à cause du NAT
+    environment:
+      OVH_SIP_USERNAME: ${OVH_SIP_USERNAME}
+      OVH_SIP_PASSWORD: ${OVH_SIP_PASSWORD}
+      EXTERNAL_IP: ${EXTERNAL_IP}
+      TECH_MOBILE: ${TECH_MOBILE}
+      EXT_100_PASSWORD: ${EXT_100_PASSWORD}
+      AMI_PASSWORD: ${AMI_PASSWORD}
+      VM_PIN_100: ${VM_PIN_100}
+      VM_PIN_101: ${VM_PIN_101}
+      VM_PIN_102: ${VM_PIN_102}
+      VM_PIN_103: ${VM_PIN_103}
+      VM_EMAIL_ACCUEIL: ${VM_EMAIL_ACCUEIL}
+      VM_EMAIL_DEVIS: ${VM_EMAIL_DEVIS}
+      VM_EMAIL_SUIVI: ${VM_EMAIL_SUIVI}
+      VM_EMAIL_URGENCE: ${VM_EMAIL_URGENCE}
+    volumes:
+      - ./asterisk:/etc/asterisk-templates:ro
+      - ./sounds/custom:/var/lib/asterisk/sounds/custom:ro
+      - asterisk-spool:/var/spool/asterisk
+      - asterisk-logs:/var/log/asterisk
+      - ./entrypoint.sh:/entrypoint.sh:ro
+    entrypoint: ["/entrypoint.sh"]
+    command: ["asterisk", "-fvvv"]
+
+  # MTA léger pour relayer les notifications email de la messagerie vocale
+  postfix:
+    image: boky/postfix:latest
+    container_name: depanmagic-postfix
+    restart: unless-stopped
+    environment:
+      ALLOWED_SENDER_DOMAINS: depanmagic.fr
+      RELAYHOST: ${SMTP_RELAY_HOST}
+      RELAYHOST_USERNAME: ${SMTP_RELAY_USER}
+      RELAYHOST_PASSWORD: ${SMTP_RELAY_PASSWORD}
+    ports:
+      - "127.0.0.1:25:25"
+
+volumes:
+  asterisk-spool:
+  asterisk-logs:
