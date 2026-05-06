@@ -1,10 +1,17 @@
 services:
   asterisk:
-    image: andrius/asterisk:20-current
+    build:
+      context: .
+      dockerfile: ai-agent/Dockerfile
+    image: depanmagic-asterisk-ai:latest
     container_name: depanmagic-asterisk
     restart: unless-stopped
     network_mode: host  # SIP/RTP fonctionnent mal en bridge à cause du NAT
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment:
+      # --- Trunk OVH + dialplan ---
       OVH_SIP_USERNAME: ${OVH_SIP_USERNAME}
       OVH_SIP_PASSWORD: ${OVH_SIP_PASSWORD}
       EXTERNAL_IP: ${EXTERNAL_IP}
@@ -19,16 +26,42 @@ services:
       VM_EMAIL_DEVIS: ${VM_EMAIL_DEVIS}
       VM_EMAIL_SUIVI: ${VM_EMAIL_SUIVI}
       VM_EMAIL_URGENCE: ${VM_EMAIL_URGENCE}
+      # --- AI Agent ---
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      CLAUDE_MODEL: ${CLAUDE_MODEL:-claude-opus-4-7}
+      DEEPGRAM_API_KEY: ${DEEPGRAM_API_KEY}
+      ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY}
+      ELEVENLABS_VOICE_ID: ${ELEVENLABS_VOICE_ID:-ThT5KcBeYPX3keUQqHPh}
+      PG_DSN: postgresql://depanmagic:${PG_PASSWORD}@postgres:5432/depanmagic
     volumes:
       - ./asterisk:/etc/asterisk-templates:ro
       - ./sounds/custom:/var/lib/asterisk/sounds/custom:ro
+      - ./ai-agent/knowledge:/opt/ai-agent/knowledge:ro
       - asterisk-spool:/var/spool/asterisk
       - asterisk-logs:/var/log/asterisk
       - ./entrypoint.sh:/entrypoint.sh:ro
     entrypoint: ["/entrypoint.sh"]
     command: ["asterisk", "-fvvv"]
 
-  # MTA léger pour relayer les notifications email de la messagerie vocale
+  postgres:
+    image: postgres:16-alpine
+    container_name: depanmagic-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: depanmagic
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: depanmagic
+    volumes:
+      - depanmagic-pg:/var/lib/postgresql/data
+      - ./ai-agent/db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U depanmagic -d depanmagic"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
   postfix:
     image: boky/postfix:latest
     container_name: depanmagic-postfix
@@ -44,3 +77,4 @@ services:
 volumes:
   asterisk-spool:
   asterisk-logs:
+  depanmagic-pg:
