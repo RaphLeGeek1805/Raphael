@@ -1,0 +1,59 @@
+services:
+  asterisk:
+    build:
+      context: .
+      dockerfile: ai-agent/Dockerfile
+    image: depanmagic-asterisk-ai:latest
+    container_name: depanmagic-asterisk
+    restart: unless-stopped
+    network_mode: host  # SIP/RTP fonctionnent mal en bridge à cause du NAT
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # --- Réception SIP depuis OVH CCS + dialplan ---
+      EXTERNAL_IP: ${EXTERNAL_IP}
+      OVH_CCS_ALLOWED_IPS: ${OVH_CCS_ALLOWED_IPS}
+      OVH_URGENCE_REFER_URI: ${OVH_URGENCE_REFER_URI}
+      TECH_MOBILE: ${TECH_MOBILE}
+      EXT_100_PASSWORD: ${EXT_100_PASSWORD}
+      AMI_PASSWORD: ${AMI_PASSWORD}
+      # --- AI Agent ---
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      CLAUDE_MODEL: ${CLAUDE_MODEL:-claude-opus-4-7}
+      DEEPGRAM_API_KEY: ${DEEPGRAM_API_KEY}
+      ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY}
+      ELEVENLABS_VOICE_ID: ${ELEVENLABS_VOICE_ID:-ThT5KcBeYPX3keUQqHPh}
+      PG_DSN: postgresql://depanmagic:${PG_PASSWORD}@postgres:5432/depanmagic
+    volumes:
+      - ./asterisk:/etc/asterisk-templates:ro
+      - ./ai-agent/knowledge:/opt/ai-agent/knowledge:ro
+      - asterisk-spool:/var/spool/asterisk
+      - asterisk-logs:/var/log/asterisk
+      - ./entrypoint.sh:/entrypoint.sh:ro
+    entrypoint: ["/entrypoint.sh"]
+    command: ["asterisk", "-fvvv"]
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: depanmagic-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: depanmagic
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: depanmagic
+    volumes:
+      - depanmagic-pg:/var/lib/postgresql/data
+      - ./ai-agent/db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U depanmagic -d depanmagic"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  asterisk-spool:
+  asterisk-logs:
+  depanmagic-pg:
