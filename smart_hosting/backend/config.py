@@ -36,6 +36,11 @@ class Config:
     TRIAL_DAYS = 14
     FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 
+    # Webhook secrets — Airbnb and Booking.com platform webhooks
+    AIRBNB_WEBHOOK_SECRET = os.getenv("AIRBNB_WEBHOOK_SECRET", "")
+    BOOKING_WEBHOOK_SECRET = os.getenv("BOOKING_WEBHOOK_SECRET", "")
+    GENERIC_WEBHOOK_SECRET = os.getenv("GENERIC_WEBHOOK_SECRET", "")
+
     # Notification stubs
     TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID", "")
     TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN", "")

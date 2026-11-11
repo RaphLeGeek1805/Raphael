@@ -44,6 +44,7 @@ def create_app(config_object=None):
     from routes.bookings import bookings_bp
     from routes.dashboard import dashboard_bp
     from routes.billing import billing_bp
+    from routes.webhooks import webhooks_bp
 
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(properties_bp, url_prefix="/api/properties")
@@ -52,6 +53,7 @@ def create_app(config_object=None):
     app.register_blueprint(bookings_bp, url_prefix="/api/bookings")
     app.register_blueprint(dashboard_bp, url_prefix="/api/dashboard")
     app.register_blueprint(billing_bp, url_prefix="/api/billing")
+    app.register_blueprint(webhooks_bp, url_prefix="/api/webhooks")
 
     # Health check
     @app.route("/api/health")
