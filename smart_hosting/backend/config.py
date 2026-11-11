@@ -3,8 +3,8 @@ from datetime import timedelta
 
 
 class Config:
-    SECRET_KEY = os.environ.get("SECRET_KEY", "acceskey-smart-hosting-secret-2024")
-    JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "acceskey-jwt-secret-2024")
+    SECRET_KEY = os.environ.get("SECRET_KEY", "acceskey-smart-hosting-secret-key-2024!")
+    JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "acceskey-jwt-secret-key-32bytes-2024!")
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=24)
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
 
