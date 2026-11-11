@@ -1,0 +1,639 @@
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   ACCESKEY - Smart Hosting - Divi Code Module
+   Thème LIGHT. Snippet sans balises document. Tokens scopés sur .ak-wrap.
+   ========================================================================== */
+
+.et_pb_code_inner { background: transparent !important; }
+.et_pb_code_inner * { font-family: 'Poppins', system-ui, sans-serif !important; box-sizing: border-box !important; }
+
+.ak-wrap {
+  --ak-blue: #51B5F8;
+  --ak-blue-dark: #2083c4;
+  --ak-blue-light: #7dc8fa;
+  --ak-blue-pale: #e8f6fe;
+  --ak-indigo: #6366F1;
+  --ak-success: #10B981;
+  --ak-heading: #0f172a;
+  --ak-body: #334155;
+  --ak-secondary: #475569;
+  --ak-muted: #64748b;
+  --ak-border: #e5e7eb;
+  --ak-grad: linear-gradient(135deg, #51B5F8 0%, #6366F1 100%);
+  --ak-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+  --ak-shadow-hover: 0 4px 8px rgba(15, 23, 42, 0.05), 0 20px 40px rgba(81, 181, 248, 0.18);
+
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+  color: #334155 !important;
+  overflow-x: hidden !important;
+  text-align: left !important;
+  line-height: 1.6 !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+.ak-wrap *, .ak-wrap *::before, .ak-wrap *::after { box-sizing: border-box !important; }
+.ak-wrap a { text-decoration: none !important; }
+.ak-wrap img { max-width: 100% !important; height: auto !important; }
+
+/* ---------- Séparateur ---------- */
+.ak-sep { height: 80px !important; width: 100% !important; display: block !important; background: transparent !important; }
+
+/* ---------- Sections ---------- */
+.ak-section { position: relative !important; padding: 80px 0 !important; }
+.ak-section-head { text-align: center !important; max-width: 720px !important; margin: 0 auto 56px !important; }
+.ak-eyebrow {
+  display: inline-block !important; padding: 6px 14px !important; border-radius: 9999px !important;
+  background: #e8f6fe !important; color: #2083c4 !important; font-size: 13px !important; font-weight: 600 !important;
+  letter-spacing: 0.02em !important; margin-bottom: 16px !important;
+}
+.ak-h2 {
+  font-size: 40px !important; font-weight: 700 !important; line-height: 1.2 !important; color: #0f172a !important;
+  letter-spacing: -0.02em !important; margin: 0 0 16px !important;
+}
+.ak-h3 { font-size: 20px !important; font-weight: 600 !important; line-height: 1.3 !important; color: #0f172a !important; margin: 0 0 8px !important; }
+.ak-text { font-size: 16px !important; font-weight: 400 !important; color: #475569 !important; margin: 0 !important; }
+.ak-gradient-text {
+  background: linear-gradient(135deg, #51B5F8 0%, #6366F1 100%) !important;
+  -webkit-background-clip: text !important; background-clip: text !important;
+  -webkit-text-fill-color: transparent !important; color: transparent !important; font-style: normal !important;
+}
+
+/* ---------- Icônes ---------- */
+.ak-ico { width: 24px !important; height: 24px !important; stroke: #51B5F8 !important; fill: none !important; stroke-width: 1.8 !important; stroke-linecap: round !important; stroke-linejoin: round !important; display: block !important; }
+.ak-ico-box {
+  width: 52px !important; height: 52px !important; border-radius: 14px !important; background: #e8f6fe !important;
+  display: flex !important; align-items: center !important; justify-content: center !important; margin-bottom: 20px !important;
+  transition: background 0.3s ease, transform 0.3s ease !important;
+}
+.ak-ico-box .ak-ico { stroke: #2083c4 !important; }
+.ak-ico-box--ind { background: #eef0ff !important; }
+.ak-ico-box--ind .ak-ico { stroke: #6366F1 !important; }
+.ak-ico-box--ok { background: #e7f9f3 !important; }
+.ak-ico-box--ok .ak-ico { stroke: #10B981 !important; }
+
+/* ---------- Boutons ---------- */
+.ak-btn {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important;
+  padding: 14px 26px !important; border-radius: 12px !important; font-size: 15px !important; font-weight: 600 !important;
+  line-height: 1.2 !important; cursor: pointer !important; border: 2px solid transparent !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+  white-space: nowrap !important;
+}
+.ak-btn .ak-ico { width: 18px !important; height: 18px !important; stroke-width: 2 !important; }
+.ak-btn-primary { background: linear-gradient(135deg, #51B5F8 0%, #6366F1 100%) !important; color: #ffffff !important; box-shadow: 0 8px 20px rgba(81, 181, 248, 0.35) !important; }
+.ak-btn-primary .ak-ico { stroke: #ffffff !important; }
+.ak-btn-primary:hover { transform: translateY(-2px) !important; box-shadow: 0 12px 28px rgba(99, 102, 241, 0.35) !important; color: #ffffff !important; }
+.ak-btn-ghost { background: transparent !important; color: #2083c4 !important; border-color: #51B5F8 !important; }
+.ak-btn-ghost .ak-ico { stroke: #2083c4 !important; }
+.ak-btn-ghost:hover { background: #e8f6fe !important; transform: translateY(-2px) !important; color: #2083c4 !important; }
+.ak-btn-light { background: #ffffff !important; color: #0f172a !important; }
+.ak-btn-light:hover { transform: translateY(-2px) !important; color: #0f172a !important; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25) !important; }
+.ak-btn-block { width: 100% !important; }
+
+/* ---------- HERO ---------- */
+.ak-hero {
+  position: relative !important; overflow: hidden !important; padding: 96px 0 88px !important;
+  background:
+    radial-gradient(900px 480px at 15% -10%, rgba(81, 181, 248, 0.22) 0%, rgba(81, 181, 248, 0) 60%),
+    radial-gradient(800px 460px at 95% 10%, rgba(99, 102, 241, 0.16) 0%, rgba(99, 102, 241, 0) 60%),
+    linear-gradient(180deg, #ffffff 0%, #f8fbff 100%) !important;
+}
+.ak-hero-inner { display: grid !important; grid-template-columns: 1.1fr 0.9fr !important; gap: 56px !important; align-items: center !important; }
+.ak-badge {
+  display: inline-flex !important; align-items: center !important; gap: 10px !important; padding: 8px 16px 8px 8px !important;
+  border-radius: 9999px !important; background: #ffffff !important; border: 1px solid #e5e7eb !important;
+  box-shadow: var(--ak-shadow) !important; font-size: 14px !important; font-weight: 500 !important; color: #334155 !important; margin-bottom: 28px !important;
+}
+.ak-badge-tag { background: #51B5F8 !important; background-image: linear-gradient(135deg, #51B5F8 0%, #6366F1 100%) !important; color: #ffffff !important; padding: 4px 10px !important; border-radius: 9999px !important; font-size: 12px !important; font-weight: 600 !important; }
+.ak-h1 { font-size: 56px !important; font-weight: 700 !important; line-height: 1.1 !important; letter-spacing: -0.03em !important; color: #0f172a !important; margin: 0 0 24px !important; }
+.ak-h1 em { font-style: normal !important; background: linear-gradient(135deg, #51B5F8 0%, #6366F1 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important; color: transparent !important; }
+.ak-lead { font-size: 18px !important; font-weight: 400 !important; line-height: 1.65 !important; color: #475569 !important; margin: 0 0 36px !important; max-width: 560px !important; }
+.ak-actions { display: flex !important; flex-wrap: wrap !important; gap: 14px !important; }
+.ak-hero-points { display: flex !important; flex-wrap: wrap !important; gap: 18px !important; margin-top: 32px !important; font-size: 14px !important; color: #64748b !important; }
+.ak-hero-points span { display: inline-flex !important; align-items: center !important; gap: 6px !important; }
+.ak-hero-points .ak-ico { width: 16px !important; height: 16px !important; stroke: #10B981 !important; stroke-width: 2.4 !important; }
+
+/* Visuel hero (carte dashboard stylisée) */
+.ak-visual { position: relative !important; }
+.ak-dash {
+  background: #ffffff !important; border: 1px solid #e5e7eb !important; border-radius: 16px !important;
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12) !important; padding: 24px !important;
+}
+.ak-dash-top { display: flex !important; align-items: center !important; justify-content: space-between !important; margin-bottom: 20px !important; }
+.ak-dash-title { font-size: 15px !important; font-weight: 600 !important; color: #0f172a !important; margin: 0 !important; }
+.ak-dash-status { display: inline-flex !important; align-items: center !important; gap: 6px !important; font-size: 12px !important; font-weight: 600 !important; color: #10B981 !important; background: #e7f9f3 !important; padding: 4px 10px !important; border-radius: 9999px !important; }
+.ak-dash-status i { width: 6px !important; height: 6px !important; border-radius: 50% !important; background: #10B981 !important; display: inline-block !important; }
+.ak-dash-row {
+  display: flex !important; align-items: center !important; gap: 14px !important; padding: 14px !important;
+  border-radius: 12px !important; background: #f8fbff !important; border: 1px solid #eef2f7 !important; margin-bottom: 10px !important;
+}
+.ak-dash-row:last-child { margin-bottom: 0 !important; }
+.ak-dash-row .ak-ico-box { width: 40px !important; height: 40px !important; margin: 0 !important; border-radius: 10px !important; }
+.ak-dash-row .ak-ico-box .ak-ico { width: 20px !important; height: 20px !important; }
+.ak-dash-meta { flex: 1 1 auto !important; min-width: 0 !important; }
+.ak-dash-meta strong { display: block !important; font-size: 14px !important; font-weight: 600 !important; color: #0f172a !important; line-height: 1.3 !important; }
+.ak-dash-meta small { display: block !important; font-size: 12px !important; color: #64748b !important; }
+.ak-code { font-family: 'Poppins', system-ui, sans-serif !important; font-size: 14px !important; font-weight: 600 !important; letter-spacing: 0.15em !important; color: #2083c4 !important; background: #e8f6fe !important; padding: 6px 10px !important; border-radius: 8px !important; }
+.ak-float {
+  position: absolute !important; right: -12px !important; bottom: -20px !important; background: #ffffff !important;
+  border: 1px solid #e5e7eb !important; border-radius: 14px !important; padding: 14px 18px !important;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.14) !important; display: flex !important; align-items: center !important; gap: 12px !important;
+}
+.ak-float strong { display: block !important; font-size: 14px !important; color: #0f172a !important; font-weight: 600 !important; }
+.ak-float small { font-size: 12px !important; color: #64748b !important; }
+
+/* ---------- PAIN (douleurs) ---------- */
+.ak-pain { background: #f8fafc !important; }
+.ak-grid-3 { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 24px !important; }
+.ak-card {
+  background: #ffffff !important; border: 1px solid #e5e7eb !important; border-radius: 16px !important; padding: 32px !important;
+  box-shadow: var(--ak-shadow) !important; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+  position: relative !important; overflow: hidden !important; height: 100% !important;
+}
+.ak-card::before {
+  content: '' !important; position: absolute !important; left: 0 !important; top: 0 !important; right: 0 !important; height: 3px !important;
+  background: linear-gradient(135deg, #51B5F8 0%, #6366F1 100%) !important; opacity: 0 !important; transition: opacity 0.3s ease !important;
+}
+.ak-card:hover { transform: translateY(-6px) !important; box-shadow: var(--ak-shadow-hover) !important; border-color: rgba(81, 181, 248, 0.4) !important; }
+.ak-card:hover::before { opacity: 1 !important; }
+.ak-card:hover .ak-ico-box { transform: scale(1.06) !important; background: #d7efff !important; }
+.ak-card-text { font-size: 15px !important; color: #475569 !important; margin: 0 !important; line-height: 1.6 !important; }
+.ak-pain-card .ak-ico-box { background: #fff1f2 !important; }
+.ak-pain-card .ak-ico-box .ak-ico { stroke: #e11d48 !important; }
+.ak-pain-quote {
+  margin-top: 40px !important; text-align: center !important; font-size: 17px !important; font-weight: 500 !important; color: #0f172a !important;
+}
+.ak-pain-quote span { color: #2083c4 !important; font-weight: 600 !important; }
+
+/* ---------- FEATURES (6 cartes) ---------- */
+.ak-srv { background: #ffffff !important; }
+.ak-grid-features { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 24px !important; }
+
+/* ---------- COMMENT ÇA MARCHE ---------- */
+.ak-how { background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%) !important; }
+.ak-steps { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 24px !important; position: relative !important; }
+.ak-steps::before {
+  content: '' !important; position: absolute !important; top: 34px !important; left: 12.5% !important; right: 12.5% !important;
+  height: 2px !important; background: repeating-linear-gradient(90deg, #cfe9fb 0 8px, transparent 8px 16px) !important; z-index: 0 !important;
+}
+.ak-step { position: relative !important; z-index: 1 !important; text-align: center !important; padding: 0 8px !important; }
+.ak-step-num {
+  width: 68px !important; height: 68px !important; border-radius: 50% !important; margin: 0 auto 22px !important;
+  background: #ffffff !important; border: 2px solid #51B5F8 !important; color: #2083c4 !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 22px !important; font-weight: 700 !important; box-shadow: 0 8px 20px rgba(81, 181, 248, 0.2) !important;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease !important;
+}
+.ak-step:hover .ak-step-num { background: linear-gradient(135deg, #51B5F8 0%, #6366F1 100%) !important; color: #ffffff !important; transform: scale(1.08) !important; border-color: transparent !important; }
+.ak-step .ak-h3 { font-size: 18px !important; }
+.ak-step .ak-text { font-size: 14px !important; }
+
+/* ---------- TARIFS ---------- */
+.ak-pricing { background: #f8fafc !important; }
+.ak-plans { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 24px !important; align-items: stretch !important; }
+.ak-plan {
+  background: #ffffff !important; border: 1px solid #e5e7eb !important; border-radius: 16px !important; padding: 40px 32px !important;
+  display: flex !important; flex-direction: column !important; position: relative !important; box-shadow: var(--ak-shadow) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+.ak-plan:hover { transform: translateY(-6px) !important; box-shadow: var(--ak-shadow-hover) !important; }
+.ak-plan--featured {
+  border: 2px solid transparent !important;
+  background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #51B5F8 0%, #6366F1 100%) border-box !important;
+  box-shadow: 0 24px 50px rgba(99, 102, 241, 0.18) !important; transform: translateY(-12px) !important;
+}
+.ak-plan--featured:hover { transform: translateY(-18px) !important; }
+.ak-plan-badge {
+  position: absolute !important; top: -14px !important; left: 50% !important; transform: translateX(-50%) !important;
+  background: linear-gradient(135deg, #51B5F8 0%, #6366F1 100%) !important; color: #ffffff !important; font-size: 12px !important;
+  font-weight: 600 !important; padding: 6px 16px !important; border-radius: 9999px !important; white-space: nowrap !important;
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3) !important;
+}
+.ak-plan-name { font-size: 18px !important; font-weight: 600 !important; color: #0f172a !important; margin: 0 0 6px !important; }
+.ak-plan-desc { font-size: 14px !important; color: #64748b !important; margin: 0 0 24px !important; }
+.ak-price { display: flex !important; align-items: baseline !important; gap: 4px !important; margin-bottom: 28px !important; padding-bottom: 28px !important; border-bottom: 1px solid #e5e7eb !important; }
+.ak-price-amount { font-size: 48px !important; font-weight: 700 !important; color: #0f172a !important; line-height: 1 !important; letter-spacing: -0.02em !important; }
+.ak-price-unit { font-size: 15px !important; color: #64748b !important; font-weight: 500 !important; }
+.ak-plan-list { list-style: none !important; margin: 0 0 32px !important; padding: 0 !important; flex: 1 1 auto !important; }
+.ak-plan-list li {
+  display: flex !important; align-items: flex-start !important; gap: 12px !important; font-size: 15px !important; color: #334155 !important;
+  padding: 7px 0 !important; line-height: 1.5 !important;
+}
+.ak-plan-list .ak-ico { width: 18px !important; height: 18px !important; stroke: #10B981 !important; stroke-width: 2.4 !important; margin-top: 2px !important; flex-shrink: 0 !important; }
+.ak-plan-foot { font-size: 12px !important; color: #64748b !important; text-align: center !important; margin: 14px 0 0 !important; }
+
+/* ---------- CTA FINAL (carte sombre + glow) ---------- */
+.ak-cta { padding: 40px 0 96px !important; background: transparent !important; }
+.ak-cta-card {
+  position: relative !important; overflow: hidden !important; border-radius: 16px !important; padding: 80px 48px !important;
+  background: linear-gradient(160deg, #0b1220 0%, #0f172a 60%, #111c33 100%) !important; text-align: center !important;
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.25) !important;
+}
+.ak-cta-card::before {
+  content: '' !important; position: absolute !important; width: 520px !important; height: 520px !important; left: 50% !important; top: -260px !important;
+  transform: translateX(-50%) !important; border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(81, 181, 248, 0.45) 0%, rgba(81, 181, 248, 0) 65%) !important; pointer-events: none !important;
+}
+.ak-cta-card::after {
+  content: '' !important; position: absolute !important; width: 420px !important; height: 420px !important; right: -160px !important; bottom: -220px !important;
+  border-radius: 50% !important; background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, rgba(99, 102, 241, 0) 65%) !important; pointer-events: none !important;
+}
+.ak-cta-inner { position: relative !important; z-index: 1 !important; max-width: 760px !important; margin: 0 auto !important; }
+.ak-cta-card .ak-h2 { color: #ffffff !important; font-size: 40px !important; }
+.ak-cta-card .ak-text { color: #cbd5e1 !important; font-size: 17px !important; margin-bottom: 36px !important; }
+.ak-cta-card .ak-eyebrow { background: rgba(81, 181, 248, 0.15) !important; color: #7dc8fa !important; }
+.ak-cta-card .ak-btn-ghost { color: #ffffff !important; border-color: rgba(255, 255, 255, 0.35) !important; }
+.ak-cta-card .ak-btn-ghost:hover { background: rgba(255, 255, 255, 0.08) !important; color: #ffffff !important; }
+.ak-cta-card .ak-btn-ghost .ak-ico { stroke: #ffffff !important; }
+.ak-cta-trust { margin-top: 28px !important; font-size: 14px !important; color: #94a3b8 !important; }
+.ak-cta-trust a { color: #7dc8fa !important; font-weight: 600 !important; }
+
+/* ---------- Animations (reveal au scroll) ---------- */
+.ak-wrap.ak-js .ak-reveal { opacity: 0 !important; transform: translateY(24px) !important; transition: opacity 0.7s ease, transform 0.7s ease !important; }
+.ak-wrap.ak-js .ak-reveal.is-visible { opacity: 1 !important; transform: translateY(0) !important; }
+.ak-wrap.ak-js .ak-reveal.d1 { transition-delay: 0.1s !important; }
+.ak-wrap.ak-js .ak-reveal.d2 { transition-delay: 0.2s !important; }
+.ak-wrap.ak-js .ak-reveal.d3 { transition-delay: 0.3s !important; }
+.ak-wrap.ak-js .ak-reveal.d4 { transition-delay: 0.4s !important; }
+.ak-wrap.ak-js .ak-reveal.d5 { transition-delay: 0.5s !important; }
+@keyframes ak-float-y { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.ak-float { animation: ak-float-y 6s ease-in-out infinite !important; }
+@media (prefers-reduced-motion: reduce) {
+  .ak-wrap *, .ak-wrap *::before, .ak-wrap *::after { animation: none !important; transition: none !important; }
+  .ak-wrap.ak-js .ak-reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* ---------- Responsive : tablette ---------- */
+@media (max-width: 1024px) {
+  .ak-hero-inner { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .ak-h1 { font-size: 48px !important; }
+  .ak-steps { grid-template-columns: repeat(2, 1fr) !important; row-gap: 48px !important; }
+  .ak-steps::before { display: none !important; }
+}
+
+/* ---------- Responsive : mobile (768px) ---------- */
+@media (max-width: 768px) {
+  .ak-section { padding: 56px 0 !important; }
+  .ak-hero { padding: 56px 0 64px !important; }
+  .ak-h1 { font-size: 36px !important; line-height: 1.15 !important; }
+  .ak-h2 { font-size: 28px !important; }
+  .ak-cta-card .ak-h2 { font-size: 28px !important; }
+  .ak-lead { font-size: 16px !important; margin-bottom: 28px !important; }
+  .ak-section-head { margin-bottom: 36px !important; }
+  .ak-grid-3, .ak-grid-features, .ak-plans { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .ak-steps { grid-template-columns: 1fr !important; gap: 36px !important; }
+  .ak-plan--featured, .ak-plan--featured:hover { transform: none !important; }
+  .ak-card { padding: 26px !important; }
+  .ak-actions { flex-direction: column !important; width: 100% !important; }
+  .ak-actions .ak-btn { width: 100% !important; white-space: normal !important; }
+  .ak-float { position: static !important; margin-top: 16px !important; animation: none !important; }
+  .ak-cta { padding: 16px 0 64px !important; }
+  .ak-cta-card { padding: 56px 24px !important; border-radius: 16px !important; }
+  .ak-hero-points { gap: 12px 16px !important; }
+  .ak-pain-quote { font-size: 16px !important; }
+  .ak-plan { padding: 36px 26px !important; }
+}
+
+@media (max-width: 480px) {
+  .ak-wrap { padding: 0 16px !important; }
+  .ak-h1 { font-size: 32px !important; }
+  .ak-price-amount { font-size: 42px !important; }
+}
+</style>
+
+<div class="ak-wrap" id="ak-smart-hosting">
+
+  <!-- ============================== HERO ============================== -->
+  <section class="ak-hero" id="ak-hero">
+    <div class="ak-hero-inner">
+      <div class="ak-hero-content ak-reveal">
+        <span class="ak-badge">
+          <span class="ak-badge-tag">Nouveau</span>
+          Smart Hosting by ACCESKEY
+        </span>
+        <h1 class="ak-h1">Gérez vos accès locatifs <em>en toute autonomie</em></h1>
+        <p class="ak-lead">Gestion automatique des codes d'accès pour vos voyageurs, centralisée sur tous vos biens. Zéro remise en main propre, zéro déplacement, zéro coordination de dernière minute.</p>
+        <div class="ak-actions">
+          <a class="ak-btn ak-btn-primary" href="https://client.acceskey.fr/web/login" target="_blank" rel="noopener">
+            Essai gratuit 14 jours
+            <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a class="ak-btn ak-btn-ghost" href="mailto:contact@acceskey.fr?subject=Demande%20de%20d%C3%A9mo%20Smart%20Hosting">
+            <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Voir la démo
+          </a>
+        </div>
+        <div class="ak-hero-points">
+          <span><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Sans engagement</span>
+          <span><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Installation incluse</span>
+          <span><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Support en France</span>
+        </div>
+      </div>
+
+      <div class="ak-visual ak-reveal d2">
+        <div class="ak-dash" role="img" aria-label="Aperçu du tableau de bord Smart Hosting">
+          <div class="ak-dash-top">
+            <p class="ak-dash-title">Mes logements</p>
+            <span class="ak-dash-status"><i></i>Tous en ligne</span>
+          </div>
+          <div class="ak-dash-row">
+            <div class="ak-ico-box">
+              <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="ak-dash-meta"><strong>Studio Bastille</strong><small>Serrure connectée · Actif</small></div>
+            <span class="ak-code">4821</span>
+          </div>
+          <div class="ak-dash-row">
+            <div class="ak-ico-box ak-ico-box--ind">
+              <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="ak-dash-meta"><strong>Réservation confirmée</strong><small>Synchronisé avec Airbnb</small></div>
+            <span class="ak-code">Auto</span>
+          </div>
+          <div class="ak-dash-row">
+            <div class="ak-ico-box ak-ico-box--ok">
+              <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="ak-dash-meta"><strong>Code envoyé au voyageur</strong><small>Par SMS et e-mail</small></div>
+            <span class="ak-code">Il y a 2 min</span>
+          </div>
+        </div>
+        <div class="ak-float">
+          <div class="ak-ico-box ak-ico-box--ok" style="margin:0 !important;width:40px !important;height:40px !important;border-radius:10px !important;">
+            <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true" style="width:20px !important;height:20px !important;stroke:#10B981 !important;"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <strong>Check-in réussi</strong>
+            <small>Aucun déplacement requis</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ak-sep"></div>
+
+  <!-- ============================== DOULEURS ============================== -->
+  <section class="ak-section ak-pain" id="ak-douleurs">
+    <div class="ak-section-head ak-reveal">
+      <span class="ak-eyebrow">Le quotidien d'un hôte</span>
+      <h2 class="ak-h2">Gérer ses locations à la main, <span class="ak-gradient-text">ça ne tient pas longtemps</span></h2>
+      <p class="ak-text">Chaque réservation ajoute son lot de tâches répétitives. Trois irritants reviennent systématiquement.</p>
+    </div>
+
+    <div class="ak-grid-3">
+      <article class="ak-card ak-pain-card ak-reveal d1">
+        <div class="ak-ico-box">
+          <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <h3 class="ak-h3">Oubli de codes</h3>
+        <p class="ak-card-text">Un code oublié, mal transmis ou envoyé trop tard : le voyageur attend devant la porte et votre note en pâtit.</p>
+      </article>
+
+      <article class="ak-card ak-pain-card ak-reveal d2">
+        <div class="ak-ico-box">
+          <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3 class="ak-h3">Remises en main propre chronophages</h3>
+        <p class="ak-card-text">Déplacements, rendez-vous à coordonner, attente sur place : des heures perdues à chaque arrivée.</p>
+      </article>
+
+      <article class="ak-card ak-pain-card ak-reveal d3">
+        <div class="ak-ico-box">
+          <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="ak-h3">Coordination impossible multi-biens</h3>
+        <p class="ak-card-text">Plusieurs logements, plusieurs calendriers, plusieurs accès : sans outil dédié, la gestion devient ingérable.</p>
+      </article>
+    </div>
+
+    <p class="ak-pain-quote ak-reveal">Et si chaque accès se gérait <span>tout seul</span>, du premier message jusqu'au départ ?</p>
+  </section>
+
+  <div class="ak-sep"></div>
+
+  <!-- ============================== FEATURES ============================== -->
+  <section class="ak-section ak-srv" id="ak-fonctionnalites">
+    <div class="ak-section-head ak-reveal">
+      <span class="ak-eyebrow">Fonctionnalités</span>
+      <h2 class="ak-h2">Tout ce qu'il faut pour <span class="ak-gradient-text">piloter vos accès</span></h2>
+      <p class="ak-text">Une plateforme pensée pour les hôtes en location courte durée, qu'ils gèrent un bien ou une flotte entière.</p>
+    </div>
+
+    <div class="ak-grid-features">
+      <article class="ak-card ak-reveal d1">
+        <div class="ak-ico-box">
+          <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3 class="ak-h3">Accès automatique</h3>
+        <p class="ak-card-text">Un code unique est généré et activé automatiquement pour chaque réservation, sans intervention de votre part.</p>
+      </article>
+
+      <article class="ak-card ak-reveal d2">
+        <div class="ak-ico-box ak-ico-box--ind">
+          <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="8" height="8" rx="1.5"/><rect x="14" y="3" width="8" height="8" rx="1.5"/><rect x="2" y="13" width="8" height="8" rx="1.5"/><rect x="14" y="13" width="8" height="8" rx="1.5"/></svg>
+        </div>
+        <h3 class="ak-h3">Multi-propriétés</h3>
+        <p class="ak-card-text">Centralisez tous vos logements, serrures et calendriers dans une seule interface, avec une vue claire par bien.</p>
+      </article>
+
+      <article class="ak-card ak-reveal d3">
+        <div class="ak-ico-box ak-ico-box--ok">
+          <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <h3 class="ak-h3">Notifications temps réel</h3>
+        <p class="ak-card-text">Soyez alerté en direct de chaque arrivée, départ ou événement sur une serrure, où que vous soyez.</p>
+      </article>
+
+      <article class="ak-card ak-reveal d1">
+        <div class="ak-ico-box">
+          <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <h3 class="ak-h3">Intégrations</h3>
+        <p class="ak-card-text">Synchronisation avec Airbnb, Booking.com et Abritel : vos réservations alimentent automatiquement vos accès.</p>
+      </article>
+
+      <article class="ak-card ak-reveal d2">
+        <div class="ak-ico-box ak-ico-box--ind">
+          <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3 class="ak-h3">Analytics</h3>
+        <p class="ak-card-text">Taux d'occupation, historique des accès et activité par logement pour piloter votre activité avec des chiffres fiables.</p>
+      </article>
+
+      <article class="ak-card ak-reveal d3">
+        <div class="ak-ico-box ak-ico-box--ok">
+          <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        </div>
+        <h3 class="ak-h3">Support 24/7</h3>
+        <p class="ak-card-text">Une équipe joignable à tout moment par téléphone et e-mail pour vous accompagner, du paramétrage à l'exploitation.</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="ak-sep"></div>
+
+  <!-- ============================== COMMENT ÇA MARCHE ============================== -->
+  <section class="ak-section ak-how" id="ak-comment-ca-marche">
+    <div class="ak-section-head ak-reveal">
+      <span class="ak-eyebrow">Comment ça marche</span>
+      <h2 class="ak-h2">Opérationnel en <span class="ak-gradient-text">quatre étapes</span></h2>
+      <p class="ak-text">De l'installation à la première arrivée automatisée, le parcours est simple et guidé.</p>
+    </div>
+
+    <div class="ak-steps">
+      <div class="ak-step ak-reveal d1">
+        <div class="ak-step-num">1</div>
+        <h3 class="ak-h3">Connectez votre serrure</h3>
+        <p class="ak-text">Nous installons et associons votre serrure connectée à votre compte en quelques minutes.</p>
+      </div>
+      <div class="ak-step ak-reveal d2">
+        <div class="ak-step-num">2</div>
+        <h3 class="ak-h3">Liez votre calendrier</h3>
+        <p class="ak-text">Connectez Airbnb ou Booking.com pour que chaque réservation déclenche son accès.</p>
+      </div>
+      <div class="ak-step ak-reveal d3">
+        <div class="ak-step-num">3</div>
+        <h3 class="ak-h3">Le voyageur reçoit son code</h3>
+        <p class="ak-text">Le code d'accès est envoyé automatiquement par SMS ou e-mail, avant l'arrivée.</p>
+      </div>
+      <div class="ak-step ak-reveal d4">
+        <div class="ak-step-num">4</div>
+        <h3 class="ak-h3">Gérez tout depuis le dashboard</h3>
+        <p class="ak-text">Suivez les accès, modifiez un code ou révoquez-le à distance, depuis n'importe quel appareil.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ak-sep"></div>
+
+  <!-- ============================== TARIFS ============================== -->
+  <section class="ak-section ak-pricing" id="ak-tarifs">
+    <div class="ak-section-head ak-reveal">
+      <span class="ak-eyebrow">Tarifs</span>
+      <h2 class="ak-h2">Une offre adaptée à <span class="ak-gradient-text">la taille de votre parc</span></h2>
+      <p class="ak-text">Des formules mensuelles sans engagement. Changez de formule à tout moment selon l'évolution de vos biens.</p>
+    </div>
+
+    <div class="ak-plans">
+      <!-- Starter -->
+      <article class="ak-plan ak-reveal d1">
+        <h3 class="ak-plan-name">Starter</h3>
+        <p class="ak-plan-desc">Pour un premier logement en location courte durée.</p>
+        <div class="ak-price">
+          <span class="ak-price-amount">29€</span>
+          <span class="ak-price-unit">/ mois</span>
+        </div>
+        <ul class="ak-plan-list">
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Jusqu'à 1 bien</li>
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Codes d'accès automatiques</li>
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Dashboard web check-in / check-out</li>
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Support par e-mail</li>
+        </ul>
+        <a class="ak-btn ak-btn-ghost ak-btn-block" href="https://client.acceskey.fr/web/login" target="_blank" rel="noopener">Choisir Starter</a>
+      </article>
+
+      <!-- Pro (recommandé) -->
+      <article class="ak-plan ak-plan--featured ak-reveal d2">
+        <span class="ak-plan-badge">Recommandé</span>
+        <h3 class="ak-plan-name">Pro</h3>
+        <p class="ak-plan-desc">Pour les hôtes qui gèrent plusieurs logements.</p>
+        <div class="ak-price">
+          <span class="ak-price-amount">69€</span>
+          <span class="ak-price-unit">/ mois</span>
+        </div>
+        <ul class="ak-plan-list">
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Jusqu'à 5 biens</li>
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Tout le plan Starter</li>
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Intégrations Airbnb, Booking.com, Abritel</li>
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Notifications temps réel</li>
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Support prioritaire</li>
+        </ul>
+        <a class="ak-btn ak-btn-primary ak-btn-block" href="https://client.acceskey.fr/web/login" target="_blank" rel="noopener">
+          Démarrer avec Pro
+          <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <p class="ak-plan-foot">Essai gratuit 14 jours inclus</p>
+      </article>
+
+      <!-- Business -->
+      <article class="ak-plan ak-reveal d3">
+        <h3 class="ak-plan-name">Business</h3>
+        <p class="ak-plan-desc">Pour les gestionnaires et les parcs importants.</p>
+        <div class="ak-price">
+          <span class="ak-price-amount">149€</span>
+          <span class="ak-price-unit">/ mois</span>
+        </div>
+        <ul class="ak-plan-list">
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Biens illimités</li>
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Tout le plan Pro</li>
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Multi-utilisateurs et délégation</li>
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Analytics avancés</li>
+          <li><svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Support 24/7 dédié</li>
+        </ul>
+        <a class="ak-btn ak-btn-ghost ak-btn-block" href="mailto:contact@acceskey.fr?subject=Offre%20Business%20Smart%20Hosting">Nous contacter</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================== CTA FINAL ============================== -->
+  <section class="ak-cta" id="ak-cta">
+    <div class="ak-cta-card ak-reveal">
+      <div class="ak-cta-inner">
+        <span class="ak-eyebrow">Smart Hosting by ACCESKEY</span>
+        <h2 class="ak-h2">Transformez votre gestion locative aujourd'hui</h2>
+        <p class="ak-text">Rejoignez les hôtes qui ont déjà automatisé leurs accès. Testez gratuitement pendant 14 jours, sans engagement.</p>
+        <div class="ak-actions" style="justify-content:center !important;">
+          <a class="ak-btn ak-btn-light" href="https://client.acceskey.fr/web/login" target="_blank" rel="noopener">
+            Démarrer gratuitement
+            <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true" style="stroke:#6366F1 !important;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a class="ak-btn ak-btn-ghost" href="tel:+33766729473">
+            <svg class="ak-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            07 66 72 94 73
+          </a>
+        </div>
+        <p class="ak-cta-trust">Une question ? Écrivez-nous à <a href="mailto:contact@acceskey.fr">contact@acceskey.fr</a></p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('ak-smart-hosting');
+  if (!root) return;
+
+  function init() {
+    root.classList.add('ak-js');
+    var items = root.querySelectorAll('.ak-reveal');
+
+    if (!('IntersectionObserver' in window)) {
+      for (var i = 0; i < items.length; i++) items[i].classList.add('is-visible');
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    for (var j = 0; j < items.length; j++) observer.observe(items[j]);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
