@@ -11,7 +11,7 @@ from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 
 from config import DevelopmentConfig
-from models import db, User, Property, Lock, AccessCode, Booking
+from models import db, User, Property, Lock, AccessCode, Booking, StripeCustomer
 
 
 logging.basicConfig(
@@ -43,6 +43,7 @@ def create_app(config_object=None):
     from routes.access_codes import codes_bp
     from routes.bookings import bookings_bp
     from routes.dashboard import dashboard_bp
+    from routes.billing import billing_bp
 
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(properties_bp, url_prefix="/api/properties")
@@ -50,6 +51,7 @@ def create_app(config_object=None):
     app.register_blueprint(codes_bp, url_prefix="/api/codes")
     app.register_blueprint(bookings_bp, url_prefix="/api/bookings")
     app.register_blueprint(dashboard_bp, url_prefix="/api/dashboard")
+    app.register_blueprint(billing_bp, url_prefix="/api/billing")
 
     # Health check
     @app.route("/api/health")

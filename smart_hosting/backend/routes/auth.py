@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
@@ -6,7 +6,7 @@ from flask_jwt_extended import (
     get_jwt_identity,
 )
 from models import db, User
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -46,7 +46,10 @@ def register():
     if User.query.filter_by(email=email).first():
         return jsonify({"error": "Email already registered"}), 409
 
-    user = User(email=email, name=name)
+    trial_days = current_app.config.get("TRIAL_DAYS", 14)
+    trial_expires = datetime.now(timezone.utc).replace(tzinfo=None) + timedelta(days=trial_days)
+
+    user = User(email=email, name=name, plan="starter", plan_expires_at=trial_expires)
     user.set_password(password)
     db.session.add(user)
     db.session.commit()

@@ -25,6 +25,17 @@ class Config:
         "business": {"properties": -1, "locks_per_property": -1},
     }
 
+    # Stripe billing
+    STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
+    STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+    STRIPE_PRICE_IDS = {
+        "starter": os.environ.get("STRIPE_PRICE_STARTER", "price_starter_monthly"),
+        "pro": os.environ.get("STRIPE_PRICE_PRO", "price_pro_monthly"),
+        "business": os.environ.get("STRIPE_PRICE_BUSINESS", "price_business_monthly"),
+    }
+    TRIAL_DAYS = 14
+    FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
+
     # Notification stubs
     TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID", "")
     TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN", "")

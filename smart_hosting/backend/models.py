@@ -148,6 +148,27 @@ class AccessCode(db.Model):
         return data
 
 
+class StripeCustomer(db.Model):
+    __tablename__ = "stripe_customers"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), unique=True, nullable=False)
+    stripe_customer_id = db.Column(db.String(100), unique=True, nullable=False)
+    stripe_subscription_id = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=utcnow)
+
+    user = db.relationship("User", backref=db.backref("stripe_customer", uselist=False))
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "stripe_customer_id": self.stripe_customer_id,
+            "stripe_subscription_id": self.stripe_subscription_id,
+            "created_at": self.created_at.isoformat(),
+        }
+
+
 class Booking(db.Model):
     __tablename__ = "bookings"
 
